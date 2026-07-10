@@ -53,6 +53,21 @@ const stats = [
   { value: '100%', label: 'проектов до результата' },
 ]
 
+// Кейсы. Пока один — просто добавьте новые объекты в массив, чтобы расширить.
+const cases = [
+  {
+    n: '01',
+    tag: 'Лендинг',
+    year: '2025',
+    title: 'Лендинг для студии услуг',
+    desc: 'Продающий одностраничник под запуск: сильный оффер, чистая структура, быстрая загрузка и форма заявки в пару кликов.',
+    stack: ['React', 'Tailwind', 'Framer Motion'],
+    metric: '+64%',
+    metricLabel: 'рост заявок за месяц',
+    href: '#',
+  },
+]
+
 export default function Home() {
   return (
     <main className="relative">
@@ -239,6 +254,105 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ---------------- CASES ---------------- */}
+      <section
+        id="cases"
+        className="relative scroll-mt-24 overflow-hidden border-t border-white/5 bg-ink py-24"
+      >
+        <HoloDecor variant="b" aura scanlines={false} />
+        <div className="relative z-10 mx-auto max-w-7xl px-6">
+          <div className="mb-14 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+            <div>
+              <p className="mb-4 font-jakarta text-[11px] font-bold uppercase tracking-[0.25em] text-accent">
+                [ кейсы ]
+              </p>
+              <h2 className="max-w-xl text-3xl font-extrabold leading-tight sm:text-4xl">
+                Избранные работы
+              </h2>
+            </div>
+            <p className="max-w-sm text-[14px] text-white/55">
+              Проекты, которыми горжусь. Скоро здесь будет больше.
+            </p>
+          </div>
+
+          {cases.map((c) => (
+            <Reveal key={c.n}>
+              <article className="grid overflow-hidden rounded-3xl border border-white/10 bg-white/[0.02] lg:grid-cols-2">
+                {/* left: описание */}
+                <div className="flex flex-col justify-between gap-8 p-8 sm:p-10">
+                  <div>
+                    <div className="mb-6 flex items-center gap-3 font-mono text-[12px] text-accent">
+                      <span>{c.n}</span>
+                      <span className="h-px w-8 bg-accent/40" />
+                      <span className="text-white/40">
+                        {c.tag} · {c.year}
+                      </span>
+                    </div>
+                    <h3 className="text-2xl font-bold sm:text-3xl">{c.title}</h3>
+                    <p className="mt-4 max-w-md text-[15px] leading-relaxed text-white/60">
+                      {c.desc}
+                    </p>
+                    <div className="mt-6 flex flex-wrap gap-2">
+                      {c.stack.map((s) => (
+                        <span
+                          key={s}
+                          className="rounded-full border border-white/10 bg-white/5 px-3 py-1 font-mono text-[11px] text-white/60"
+                        >
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div className="flex items-end justify-between gap-6">
+                    <div>
+                      <div className="holo-text text-4xl font-extrabold">
+                        {c.metric}
+                      </div>
+                      <div className="mt-1 text-[12px] text-white/50">
+                        {c.metricLabel}
+                      </div>
+                    </div>
+                    <a
+                      href={c.href}
+                      className="inline-flex items-center gap-2 rounded-full border border-accent/40 px-5 py-2.5 text-[13px] font-semibold text-accent transition hover:bg-accent hover:text-ink"
+                    >
+                      Смотреть <ArrowUpRight size={15} />
+                    </a>
+                  </div>
+                </div>
+
+                {/* right: макет-превью (плейсхолдер — замените на скриншот проекта) */}
+                <div className="relative min-h-[300px] overflow-hidden border-t border-white/10 bg-[#0a1512] p-6 lg:border-l lg:border-t-0">
+                  <div className="holo-shimmer relative h-full overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-[#0d2a22] via-[#0a1512] to-[#071b17]">
+                    <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
+                      <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-accent/60" />
+                      <span className="ml-3 rounded bg-white/5 px-3 py-0.5 font-mono text-[10px] text-white/40">
+                        project.ru
+                      </span>
+                    </div>
+                    <div className="space-y-3 p-5">
+                      <div className="h-3 w-1/3 rounded bg-accent/50" />
+                      <div className="h-6 w-4/5 rounded bg-white/15" />
+                      <div className="h-6 w-3/5 rounded bg-white/10" />
+                      <div className="mt-4 h-8 w-28 rounded-full bg-accent/70" />
+                      <div className="mt-6 grid grid-cols-3 gap-3">
+                        <div className="h-16 rounded-lg border border-white/10 bg-white/5" />
+                        <div className="h-16 rounded-lg border border-white/10 bg-white/5" />
+                        <div className="h-16 rounded-lg border border-white/10 bg-white/5" />
+                      </div>
+                    </div>
+                    <div className="pointer-events-none absolute -bottom-10 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-accent/25 blur-[60px]" />
+                  </div>
+                </div>
+              </article>
+            </Reveal>
+          ))}
         </div>
       </section>
 
