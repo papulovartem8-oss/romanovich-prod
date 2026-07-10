@@ -57,14 +57,16 @@ const stats = [
 const cases = [
   {
     n: '01',
-    tag: 'Лендинг',
+    tag: 'Лендинг · салон красоты',
     year: '2025',
-    title: 'Лендинг для студии услуг',
-    desc: 'Продающий одностраничник под запуск: сильный оффер, чистая структура, быстрая загрузка и форма заявки в пару кликов.',
-    stack: ['React', 'Tailwind', 'Framer Motion'],
-    metric: '+64%',
-    metricLabel: 'рост заявок за месяц',
-    href: '#',
+    title: '«Пили ногти, а не мужа»',
+    desc: 'Лендинг салона красоты в Москве: услуги, прайс, галерея работ, мастера и отзывы. Онлайн-запись за минуту, адаптив и быстрая загрузка.',
+    stack: ['HTML5', 'CSS3', 'JavaScript'],
+    metric: '1 мин',
+    metricLabel: 'до онлайн-записи',
+    href: 'https://papulovartem8-oss.github.io/pili-nogti-landing/',
+    preview: 'https://papulovartem8-oss.github.io/pili-nogti-landing/',
+    domain: 'pili-nogti-landing',
   },
 ]
 
@@ -318,38 +320,53 @@ export default function Home() {
                     </div>
                     <a
                       href={c.href}
+                      target="_blank"
+                      rel="noopener"
                       className="inline-flex items-center gap-2 rounded-full border border-accent/40 px-5 py-2.5 text-[13px] font-semibold text-accent transition hover:bg-accent hover:text-ink"
                     >
-                      Смотреть <ArrowUpRight size={15} />
+                      Открыть сайт <ArrowUpRight size={15} />
                     </a>
                   </div>
                 </div>
 
-                {/* right: макет-превью (плейсхолдер — замените на скриншот проекта) */}
-                <div className="relative min-h-[300px] overflow-hidden border-t border-white/10 bg-[#0a1512] p-6 lg:border-l lg:border-t-0">
-                  <div className="holo-shimmer relative h-full overflow-hidden rounded-xl border border-white/10 bg-gradient-to-br from-[#0d2a22] via-[#0a1512] to-[#071b17]">
-                    <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
+                {/* right: живое превью проекта (iframe) */}
+                <a
+                  href={c.href}
+                  target="_blank"
+                  rel="noopener"
+                  className="group/pv relative block min-h-[300px] overflow-hidden border-t border-white/10 bg-[#0a1512] p-6 lg:border-l lg:border-t-0"
+                >
+                  <div className="holo-shimmer relative flex h-full min-h-[260px] flex-col overflow-hidden rounded-xl border border-white/10">
+                    {/* browser chrome */}
+                    <div className="flex items-center gap-2 border-b border-white/10 bg-white/[0.03] px-4 py-3">
                       <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
                       <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
                       <span className="h-2.5 w-2.5 rounded-full bg-accent/60" />
-                      <span className="ml-3 rounded bg-white/5 px-3 py-0.5 font-mono text-[10px] text-white/40">
-                        project.ru
+                      <span className="ml-3 truncate rounded bg-white/5 px-3 py-0.5 font-mono text-[10px] text-white/40">
+                        {c.domain}
                       </span>
                     </div>
-                    <div className="space-y-3 p-5">
-                      <div className="h-3 w-1/3 rounded bg-accent/50" />
-                      <div className="h-6 w-4/5 rounded bg-white/15" />
-                      <div className="h-6 w-3/5 rounded bg-white/10" />
-                      <div className="mt-4 h-8 w-28 rounded-full bg-accent/70" />
-                      <div className="mt-6 grid grid-cols-3 gap-3">
-                        <div className="h-16 rounded-lg border border-white/10 bg-white/5" />
-                        <div className="h-16 rounded-lg border border-white/10 bg-white/5" />
-                        <div className="h-16 rounded-lg border border-white/10 bg-white/5" />
-                      </div>
+                    {/* live iframe preview */}
+                    <div className="relative flex-1 bg-white">
+                      {c.preview && (
+                        <iframe
+                          src={c.preview}
+                          title={c.title}
+                          loading="lazy"
+                          tabIndex={-1}
+                          aria-hidden="true"
+                          scrolling="no"
+                          sandbox="allow-scripts allow-same-origin"
+                          className="pointer-events-none absolute inset-0 h-full w-full border-0"
+                        />
+                      )}
                     </div>
-                    <div className="pointer-events-none absolute -bottom-10 left-1/2 h-40 w-40 -translate-x-1/2 rounded-full bg-accent/25 blur-[60px]" />
+                    {/* hover hint */}
+                    <span className="pointer-events-none absolute bottom-3 right-3 rounded-full bg-ink/80 px-3 py-1 text-[11px] font-semibold text-accent opacity-0 backdrop-blur transition group-hover/pv:opacity-100">
+                      Открыть ↗
+                    </span>
                   </div>
-                </div>
+                </a>
               </article>
             </Reveal>
           ))}
