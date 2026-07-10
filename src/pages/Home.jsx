@@ -12,6 +12,7 @@ import {
   Code2,
   Rocket,
   ChevronDown,
+  Send,
 } from 'lucide-react'
 import VideoBackground from '../components/VideoBackground.jsx'
 import LiquidGlassCard from '../components/LiquidGlassCard.jsx'
@@ -46,6 +47,8 @@ const process = [
   { icon: Code2, step: '03', title: 'Разработка', desc: 'Чистый код, адаптив, анимации и скорость. Всё, как в макете — пиксель в пиксель.' },
   { icon: Rocket, step: '04', title: 'Запуск', desc: 'Деплой, аналитика, домен. Передаю проект и остаюсь на связи.' },
 ]
+
+const TELEGRAM = 'https://t.me/Rmnvchprod'
 
 const stats = [
   { value: '5+', label: 'лет в разработке' },
@@ -449,16 +452,27 @@ export default function Home() {
             Оставьте заявку — задам несколько вопросов о проекте и вернусь с
             предложением. Это займёт пару минут.
           </p>
-          <Link
-            to="/brief"
-            className="group mt-9 inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-[14px] font-bold uppercase tracking-wide text-ink transition hover:brightness-110"
-          >
-            Оставить заявку
-            <ArrowRight
-              size={18}
-              className="transition-transform group-hover:translate-x-1"
-            />
-          </Link>
+          <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+            <Link
+              to="/brief"
+              className="group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-[14px] font-bold uppercase tracking-wide text-ink transition hover:brightness-110"
+            >
+              Оставить заявку
+              <ArrowRight
+                size={18}
+                className="transition-transform group-hover:translate-x-1"
+              />
+            </Link>
+            <a
+              href={TELEGRAM}
+              target="_blank"
+              rel="noopener"
+              className="group inline-flex items-center gap-2 rounded-full border border-accent/40 px-8 py-4 text-[14px] font-bold uppercase tracking-wide text-accent transition hover:bg-accent hover:text-ink"
+            >
+              <Send size={17} className="transition-transform group-hover:-translate-y-0.5" />
+              Написать в Telegram
+            </a>
+          </div>
         </div>
       </section>
 
@@ -469,12 +483,22 @@ export default function Home() {
             ROMANOVICH<span className="text-accent"> PROD</span>
           </span>
           <span>© {new Date().getFullYear()} Артём Романович. Все права защищены.</span>
-          <a
-            href="mailto:papulovartem8@gmail.com"
-            className="transition hover:text-accent"
-          >
-            papulovartem8@gmail.com
-          </a>
+          <div className="flex items-center gap-5">
+            <a
+              href={TELEGRAM}
+              target="_blank"
+              rel="noopener"
+              className="inline-flex items-center gap-1.5 transition hover:text-accent"
+            >
+              <Send size={14} /> Telegram
+            </a>
+            <a
+              href="mailto:papulovartem8@gmail.com"
+              className="transition hover:text-accent"
+            >
+              papulovartem8@gmail.com
+            </a>
+          </div>
         </div>
       </footer>
     </main>

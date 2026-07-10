@@ -1,10 +1,12 @@
 import { useState, useMemo, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowRight, ArrowLeft, Check, CornerDownLeft } from 'lucide-react'
+import { ArrowRight, ArrowLeft, Check, CornerDownLeft, Send } from 'lucide-react'
 import VideoBackground from '../components/VideoBackground.jsx'
 import TypingText from '../components/TypingText.jsx'
 import HoloDecor from '../components/HoloDecor.jsx'
+
+const TELEGRAM = 'https://t.me/Rmnvchprod'
 
 const questions = [
   {
@@ -260,11 +262,20 @@ export default function Brief() {
                     href={mailtoHref}
                     className="group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-[14px] font-bold uppercase text-ink transition hover:brightness-110"
                   >
-                    Отправить заявку
+                    Отправить на почту
                     <ArrowRight
                       size={18}
                       className="transition-transform group-hover:translate-x-1"
                     />
+                  </a>
+                  <a
+                    href={TELEGRAM}
+                    target="_blank"
+                    rel="noopener"
+                    className="group inline-flex items-center gap-2 rounded-full border border-accent/40 px-8 py-4 text-[14px] font-bold uppercase text-accent transition hover:bg-accent hover:text-ink"
+                  >
+                    <Send size={17} className="transition-transform group-hover:-translate-y-0.5" />
+                    Написать в Telegram
                   </a>
                   <Link
                     to="/"
