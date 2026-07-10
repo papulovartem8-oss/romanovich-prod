@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink text-white font-sans antialiased;
+  overflow-x: hidden;
+}
+
+/* Selection */
+::selection {
+  background: #5ed29c;
+  color: #070b0a;
+}
+
+/* Thin custom scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #070b0a;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(94, 210, 156, 0.25);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(94, 210, 156, 0.45);
+}
+
+/* ---------- Liquid glass card ---------- */
+.liquid-glass {
+  position: relative;
+  background: rgba(255, 255, 255, 0.01);
+  background-blend-mode: luminosity;
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1),
+    0 30px 60px -20px rgba(0, 0, 0, 0.7);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+/* High-end 1.4px gradient border frame via mask-composite */
+.liquid-glass::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1.4px;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0.05)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Digital terminal chrome for cards / inputs */
+.terminal-frame {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(6px);
+  border-radius: 16px;
+}
+
+.text-glow {
+  text-shadow: 0 0 24px rgba(94, 210, 156, 0.45);
+}
+
+/* ============ HOLOGRAPHIC / DIGITAL FX ============ */
+
+/* Blurred green glow orb */
+.holo-orb {
+  position: absolute;
+  border-radius: 9999px;
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(94, 210, 156, 0.5),
+    rgba(11, 107, 87, 0.22) 45%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  will-change: transform;
+}
+
+@keyframes holo-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -28px, 0) scale(1.08);
+  }
+}
+.holo-float {
+  animation: holo-float 9s ease-in-out infinite;
+}
+.holo-float-slow {
+  animation: holo-float 14s ease-in-out infinite;
+}
+
+/* Perspective holographic grid floor */
+@keyframes holo-grid-scroll {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 48px;
+  }
+}
+.holo-grid {
+  background-image: linear-gradient(
+      to right,
+      rgba(94, 210, 156, 0.18) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(94, 210, 156, 0.18) 1px, transparent 1px);
+  background-size: 48px 48px;
+  animation: holo-grid-scroll 3.5s linear infinite;
+  mask-image: linear-gradient(to top, #000 0%, transparent 85%);
+  -webkit-mask-image: linear-gradient(to top, #000 0%, transparent 85%);
+}
+.holo-grid-perspective {
+  transform: perspective(420px) rotateX(62deg);
+  transform-origin: bottom center;
+}
+
+/* Animated scanlines sweeping down */
+@keyframes holo-scan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 100vh;
+  }
+}
+.holo-scanlines {
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(94, 210, 156, 0.05) 0px,
+    rgba(94, 210, 156, 0.05) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  animation: holo-scan 8s linear infinite;
+}
+
+/* Shimmer sweep across a card (put on a positioned child) */
+@keyframes holo-shimmer {
+  0% {
+    transform: translateX(-160%) skewX(-18deg);
+  }
+  100% {
+    transform: translateX(260%) skewX(-18deg);
+  }
+}
+.holo-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    transparent 30%,
+    rgba(94, 210, 156, 0.14) 50%,
+    transparent 70%
+  );
+  transform: translateX(-160%) skewX(-18deg);
+  pointer-events: none;
+}
+.holo-shimmer:hover::after {
+  animation: holo-shimmer 1.1s ease-in-out;
+}
+
+/* Holographic gradient text */
+.holo-text {
+  background: linear-gradient(
+    120deg,
+    #5ed29c 0%,
+    #a7f3d0 30%,
+    #5ed29c 55%,
+    #12908f 80%,
+    #5ed29c 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: holo-hue 6s linear infinite;
+}
+@keyframes holo-hue {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* Slow drifting conic aura */
+@keyframes holo-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.holo-aura {
+  position: absolute;
+  border-radius: 9999px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    rgba(94, 210, 156, 0.25) 60deg,
+    transparent 140deg,
+    rgba(94, 210, 156, 0.18) 220deg,
+    transparent 300deg
+  );
+  filter: blur(30px);
+  animation: holo-spin 24s linear infinite;
+}
+
+/* Blinking caret used by the typewriter */
+.caret::after {
+  content: '';
+  display: inline-block;
+  width: 0.6ch;
+  height: 1.05em;
+  margin-left: 2px;
+  translate: 0 0.12em;
+  background: #5ed29c;
+  animation: blink 1s step-end infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
