@@ -19,6 +19,11 @@ import LiquidGlassCard from '../components/LiquidGlassCard.jsx'
 import TypingText from '../components/TypingText.jsx'
 import Reveal from '../components/Reveal.jsx'
 import HoloDecor from '../components/HoloDecor.jsx'
+import DecryptText from '../components/DecryptText.jsx'
+import BlurText from '../components/BlurText.jsx'
+import Magnetic from '../components/Magnetic.jsx'
+import TiltCard from '../components/TiltCard.jsx'
+import CountUp from '../components/CountUp.jsx'
 
 const services = [
   {
@@ -134,16 +139,18 @@ export default function Home() {
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
-            <Link
-              to="/brief"
-              className="group inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-[14px] font-bold uppercase tracking-wide text-ink transition hover:brightness-110"
-            >
-              Обсудить проект
-              <ArrowRight
-                size={18}
-                className="transition-transform group-hover:translate-x-1"
-              />
-            </Link>
+            <Magnetic>
+              <Link
+                to="/brief"
+                className="group inline-flex items-center gap-2 rounded-full bg-accent px-7 py-3.5 text-[14px] font-bold uppercase tracking-wide text-ink transition hover:brightness-110"
+              >
+                Обсудить проект
+                <ArrowRight
+                  size={18}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </Link>
+            </Magnetic>
             <a
               href="#services"
               className="inline-flex items-center gap-2 rounded-full border border-white/15 px-7 py-3.5 text-[14px] font-semibold text-white/80 transition hover:border-accent/50 hover:text-white"
@@ -172,7 +179,7 @@ export default function Home() {
         <div className="relative z-10 mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-[1.1fr_0.9fr]">
           <Reveal>
             <p className="mb-4 font-jakarta text-[11px] font-bold uppercase tracking-[0.25em] text-accent">
-              [ обо мне ]
+              <DecryptText text="[ обо мне ]" />
             </p>
             <h2 className="max-w-2xl text-3xl font-extrabold leading-tight sm:text-4xl">
               Разработчик, который думает как{' '}
@@ -189,7 +196,7 @@ export default function Home() {
               {stats.map((s) => (
                 <div key={s.label}>
                   <div className="text-3xl font-extrabold text-accent">
-                    {s.value}
+                    <CountUp value={s.value} />
                   </div>
                   <div className="mt-1 text-[12px] leading-snug text-white/50">
                     {s.label}
@@ -230,11 +237,13 @@ export default function Home() {
           <div className="mb-14 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
               <p className="mb-4 font-jakarta text-[11px] font-bold uppercase tracking-[0.25em] text-accent">
-                [ услуги ]
+                <DecryptText text="[ услуги ]" />
               </p>
-              <h2 className="max-w-xl text-3xl font-extrabold leading-tight sm:text-4xl">
-                Что я делаю
-              </h2>
+              <BlurText
+                as="h2"
+                text="Что я делаю"
+                className="max-w-xl text-3xl font-extrabold leading-tight sm:text-4xl"
+              />
             </div>
             <p className="max-w-sm text-[14px] text-white/55">
               Три направления, один стандарт качества. Выберите формат — остальное
@@ -244,13 +253,13 @@ export default function Home() {
 
           <div className="grid gap-6 md:grid-cols-3">
             {services.map((s, i) => (
+              <TiltCard key={s.title} max={6} className="h-full">
               <motion.div
-                key={s.title}
                 initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.3 }}
                 transition={{ delay: i * 0.1 }}
-                className="terminal-frame holo-shimmer group relative flex flex-col overflow-hidden p-7 transition hover:border-accent/40 hover:shadow-[0_0_40px_-8px_rgba(94,210,156,0.35)]"
+                className="terminal-frame holo-shimmer group relative flex h-full flex-col overflow-hidden p-7 transition hover:border-accent/40 hover:shadow-[0_0_40px_-8px_rgba(94,210,156,0.35)]"
               >
                 <div className="mb-6 grid h-12 w-12 place-items-center rounded-xl border border-white/10 bg-white/5 text-accent transition group-hover:border-accent/40">
                   <s.icon size={22} />
@@ -271,6 +280,7 @@ export default function Home() {
                   Заказать <ArrowUpRight size={15} />
                 </Link>
               </motion.div>
+              </TiltCard>
             ))}
           </div>
         </div>
@@ -286,11 +296,13 @@ export default function Home() {
           <div className="mb-14 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
               <p className="mb-4 font-jakarta text-[11px] font-bold uppercase tracking-[0.25em] text-accent">
-                [ работы ]
+                <DecryptText text="[ работы ]" />
               </p>
-              <h2 className="max-w-xl text-3xl font-extrabold leading-tight sm:text-4xl">
-                Избранные работы
-              </h2>
+              <BlurText
+                as="h2"
+                text="Избранные работы"
+                className="max-w-xl text-3xl font-extrabold leading-tight sm:text-4xl"
+              />
             </div>
             <p className="max-w-sm text-[14px] text-white/55">
               Проекты, которыми горжусь. Скоро здесь будет больше.
@@ -403,11 +415,13 @@ export default function Home() {
         <HoloDecor variant="a" grid aura scanlines={false} />
         <div className="relative z-10 mx-auto max-w-7xl px-6">
           <p className="mb-4 font-jakarta text-[11px] font-bold uppercase tracking-[0.25em] text-accent">
-            [ процесс ]
+            <DecryptText text="[ процесс ]" />
           </p>
-          <h2 className="mb-14 max-w-xl text-3xl font-extrabold leading-tight sm:text-4xl">
-            Как проходит работа
-          </h2>
+          <BlurText
+            as="h2"
+            text="Как проходит работа"
+            className="mb-14 max-w-xl text-3xl font-extrabold leading-tight sm:text-4xl"
+          />
 
           <div className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/5 md:grid-cols-4">
             {process.map((p, i) => (
@@ -453,25 +467,29 @@ export default function Home() {
             предложением. Это займёт пару минут.
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-            <Link
-              to="/brief"
-              className="group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-[14px] font-bold uppercase tracking-wide text-ink transition hover:brightness-110"
-            >
-              Оставить заявку
-              <ArrowRight
-                size={18}
-                className="transition-transform group-hover:translate-x-1"
-              />
-            </Link>
-            <a
-              href={TELEGRAM}
-              target="_blank"
-              rel="noopener"
-              className="group inline-flex items-center gap-2 rounded-full border border-accent/40 px-8 py-4 text-[14px] font-bold uppercase tracking-wide text-accent transition hover:bg-accent hover:text-ink"
-            >
-              <Send size={17} className="transition-transform group-hover:-translate-y-0.5" />
-              Написать в Telegram
-            </a>
+            <Magnetic>
+              <Link
+                to="/brief"
+                className="group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-[14px] font-bold uppercase tracking-wide text-ink transition hover:brightness-110"
+              >
+                Оставить заявку
+                <ArrowRight
+                  size={18}
+                  className="transition-transform group-hover:translate-x-1"
+                />
+              </Link>
+            </Magnetic>
+            <Magnetic>
+              <a
+                href={TELEGRAM}
+                target="_blank"
+                rel="noopener"
+                className="group inline-flex items-center gap-2 rounded-full border border-accent/40 px-8 py-4 text-[14px] font-bold uppercase tracking-wide text-accent transition hover:bg-accent hover:text-ink"
+              >
+                <Send size={17} className="transition-transform group-hover:-translate-y-0.5" />
+                Написать в Telegram
+              </a>
+            </Magnetic>
           </div>
         </div>
       </section>

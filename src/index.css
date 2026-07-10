@@ -81,6 +81,29 @@ body {
   text-shadow: 0 0 24px rgba(94, 210, 156, 0.45);
 }
 
+/* Cursor-tracking ambient green glow */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 520px;
+  height: 520px;
+  margin: -260px 0 0 -260px;
+  border-radius: 9999px;
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0;
+  background: radial-gradient(
+    circle,
+    rgba(94, 210, 156, 0.1) 0%,
+    rgba(94, 210, 156, 0.04) 35%,
+    transparent 65%
+  );
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+  transition: opacity 0.35s ease;
+}
+
 /* ============ HOLOGRAPHIC / DIGITAL FX ============ */
 
 /* Blurred green glow orb */
