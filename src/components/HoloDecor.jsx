@@ -37,6 +37,13 @@ export default function HoloDecor({
   className = '',
 }) {
   const orbs = VARIANTS[variant] || VARIANTS.a
+  // `particles` may be a boolean or a number (how many to show)
+  const particleList =
+    typeof particles === 'number'
+      ? PARTICLES.slice(0, particles)
+      : particles
+        ? PARTICLES
+        : []
   return (
     <div
       className={`pointer-events-none absolute inset-0 overflow-hidden ${className}`}
@@ -55,9 +62,9 @@ export default function HoloDecor({
 
       {scanlines && <div className="absolute inset-0 holo-scanlines opacity-60" />}
 
-      {particles && (
+      {particleList.length > 0 && (
         <div className="absolute inset-0">
-          {PARTICLES.map((p, i) => (
+          {particleList.map((p, i) => (
             <span
               key={i}
               className="absolute rounded-full bg-accent holo-float"

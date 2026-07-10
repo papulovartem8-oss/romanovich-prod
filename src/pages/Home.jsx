@@ -60,7 +60,7 @@ export default function Home() {
 
       {/* ---------------- HERO ---------------- */}
       <section className="relative flex min-h-screen items-center">
-        <HoloDecor variant="c" grid aura scanlines />
+        <HoloDecor variant="c" grid aura scanlines={false} particles={5} />
         <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col px-6 pt-28">
           {/* Floating liquid glass card, lifted above the headline */}
           <div className="mb-2 flex">
@@ -94,10 +94,9 @@ export default function Home() {
             </span>
           </h1>
 
-          <p className="mt-7 max-w-content text-[14px] leading-relaxed text-white/70">
-            Меня зовут Артём Романович. Проектирую и разрабатываю сайты, лендинги
-            и веб-приложения — от первого экрана до запуска. Дизайн, код и
-            результат в одних руках.
+          <p className="mt-6 max-w-md text-[15px] leading-relaxed text-white/65">
+            Артём Романович — собираю сайты и приложения, которые приносят
+            заявки и продажи.
           </p>
 
           <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -117,22 +116,6 @@ export default function Home() {
             >
               Что я делаю
             </a>
-          </div>
-
-          {/* terminal-style status line */}
-          <div className="mt-14 hidden max-w-xl items-center gap-3 font-mono text-[12px] text-white/50 md:flex">
-            <span className="text-accent">›</span>
-            <TypingText
-              words={[
-                'init romanovich-prod --stack react',
-                'building landing pages that convert...',
-                'status: доступен для новых проектов',
-              ]}
-              cycle
-              immediate
-              speed={55}
-              className="text-white/60"
-            />
           </div>
         </div>
 

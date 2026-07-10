@@ -15,8 +15,7 @@ export default function LiquidGlassCard() {
       </h3>
 
       <p className="text-[11px] leading-relaxed text-white/60">
-        Продукты под ключ — от идеи до запуска. Дизайн, код и результат в одних
-        руках.
+        Продукты под ключ — от идеи до запуска.
       </p>
     </div>
   )
