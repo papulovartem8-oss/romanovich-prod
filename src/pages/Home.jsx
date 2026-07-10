@@ -53,7 +53,7 @@ const stats = [
   { value: '100%', label: 'проектов до результата' },
 ]
 
-// Кейсы. Пока один — просто добавьте новые объекты в массив, чтобы расширить.
+// Работы. Просто добавьте новые объекты в массив, чтобы расширить.
 const cases = [
   {
     n: '01',
@@ -67,6 +67,20 @@ const cases = [
     href: 'https://papulovartem8-oss.github.io/pili-nogti-landing/',
     preview: 'https://papulovartem8-oss.github.io/pili-nogti-landing/',
     domain: 'pili-nogti-landing',
+  },
+  {
+    n: '02',
+    badge: 'Личный проект',
+    tag: 'Авторский концепт',
+    year: '2025',
+    title: 'prmpt — archive collection',
+    desc: 'Собственная концепция — без брифа и заказчика. Экспериментальный лендинг-архив: акцент на типографику, ритм и подачу. Сделал сам, чтобы проверить идею и стиль.',
+    stack: ['React', 'Vite'],
+    metric: '100%',
+    metricLabel: 'своя идея — от и до',
+    href: 'https://papulovartem8-oss.github.io/prmpt-landing/',
+    preview: 'https://papulovartem8-oss.github.io/prmpt-landing/',
+    domain: 'prmpt-landing',
   },
 ]
 
@@ -269,7 +283,7 @@ export default function Home() {
           <div className="mb-14 flex flex-col justify-between gap-4 md:flex-row md:items-end">
             <div>
               <p className="mb-4 font-jakarta text-[11px] font-bold uppercase tracking-[0.25em] text-accent">
-                [ кейсы ]
+                [ работы ]
               </p>
               <h2 className="max-w-xl text-3xl font-extrabold leading-tight sm:text-4xl">
                 Избранные работы
@@ -286,12 +300,17 @@ export default function Home() {
                 {/* left: описание */}
                 <div className="flex flex-col justify-between gap-8 p-8 sm:p-10">
                   <div>
-                    <div className="mb-6 flex items-center gap-3 font-mono text-[12px] text-accent">
+                    <div className="mb-6 flex flex-wrap items-center gap-3 font-mono text-[12px] text-accent">
                       <span>{c.n}</span>
                       <span className="h-px w-8 bg-accent/40" />
                       <span className="text-white/40">
                         {c.tag} · {c.year}
                       </span>
+                      {c.badge && (
+                        <span className="rounded-full border border-accent/40 bg-accent/10 px-2.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-accent">
+                          {c.badge}
+                        </span>
+                      )}
                     </div>
                     <h3 className="text-2xl font-bold sm:text-3xl">{c.title}</h3>
                     <p className="mt-4 max-w-md text-[15px] leading-relaxed text-white/60">
