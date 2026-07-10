@@ -2,6 +2,7 @@ import { useEffect, lazy, Suspense } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import CursorGlow from './components/CursorGlow.jsx'
+import EnergyLine from './components/EnergyLine.jsx'
 import Home from './pages/Home.jsx'
 
 // /brief is code-split so its Framer Motion flow isn't in the initial bundle
@@ -28,6 +29,7 @@ export default function App() {
     <>
       <ScrollManager />
       <CursorGlow />
+      <EnergyLine />
       <Navbar />
       <Suspense
         fallback={
