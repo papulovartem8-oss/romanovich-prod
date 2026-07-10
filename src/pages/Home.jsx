@@ -61,7 +61,7 @@ export default function Home() {
       {/* ---------------- HERO ---------------- */}
       <section className="relative flex min-h-screen items-center">
         <HoloDecor variant="c" grid aura scanlines={false} particles={5} />
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col px-6 pt-28">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col px-6 pt-52 sm:pt-28">
           {/* Floating liquid glass card, lifted above the headline */}
           <div className="mb-2 flex">
             <LiquidGlassCard />
