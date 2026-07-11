@@ -11,6 +11,8 @@
  */
 
 const ALLOWED_ORIGINS = [
+  'https://romanovich-prod.ru',
+  'https://www.romanovich-prod.ru',
   'https://papulovartem8-oss.github.io',
   'http://localhost:5173',
   'http://localhost:5174',

@@ -2,9 +2,9 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // host/port pinned so the preview panel can connect (Vite does not read PORT by default)
-export default defineConfig(({ command }) => ({
-  // Served from a subpath on GitHub Pages in production, root in dev
-  base: command === 'build' ? '/romanovich-prod/' : '/',
+export default defineConfig(() => ({
+  // Served at the custom-domain root — no subpath needed anymore
+  base: '/',
   plugins: [react()],
   server: {
     host: '127.0.0.1',
