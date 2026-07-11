@@ -1,12 +1,15 @@
 import { useState, useMemo, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowRight, ArrowLeft, Check, CornerDownLeft, Send } from 'lucide-react'
+import { ArrowRight, ArrowLeft, Check, CornerDownLeft, Send, Loader2, AlertCircle } from 'lucide-react'
 import VideoBackground from '../components/VideoBackground.jsx'
 import TypingText from '../components/TypingText.jsx'
 import HoloDecor from '../components/HoloDecor.jsx'
 
 const TELEGRAM = 'https://t.me/Rmnvchprod'
+// Cloudflare Worker endpoint that forwards submissions to the Telegram bot.
+// Falls back to email/DM if empty or the request fails.
+const WORKER_URL = import.meta.env.VITE_WORKER_URL || ''
 
 const questions = [
   {
@@ -58,6 +61,9 @@ export default function Brief() {
   const [dir, setDir] = useState(1)
   const [answers, setAnswers] = useState({})
   const [done, setDone] = useState(false)
+  // 'idle' | 'sending' | 'sent' | 'error'
+  const [submit, setSubmit] = useState('idle')
+  const [website, setWebsite] = useState('') // honeypot for bots
   const inputRef = useRef(null)
 
   // Always-current mirror of answers so goNext() reads the freshest typed value
@@ -106,6 +112,28 @@ export default function Brief() {
       goNext()
     }
   }
+
+  // Fire submission to the Cloudflare Worker when we hit the done screen.
+  const sendToBot = async () => {
+    if (!WORKER_URL) return // no endpoint configured — user has fallback buttons
+    setSubmit('sending')
+    try {
+      const res = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...answersRef.current, website }),
+      })
+      const data = await res.json().catch(() => ({}))
+      setSubmit(res.ok && data.ok ? 'sent' : 'error')
+    } catch {
+      setSubmit('error')
+    }
+  }
+
+  useEffect(() => {
+    if (done && submit === 'idle') sendToBot()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [done])
 
   const mailtoHref = useMemo(() => {
     const body = questions
@@ -245,22 +273,90 @@ export default function Brief() {
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 className="text-center"
               >
-                <div className="mx-auto mb-8 grid h-20 w-20 place-items-center rounded-2xl border border-accent/40 bg-accent/10 text-accent">
-                  <Check size={40} />
+                {/* honeypot — hidden from users, bots often fill it */}
+                <input
+                  type="text"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                  aria-hidden="true"
+                  className="pointer-events-none absolute left-[-9999px] h-0 w-0 opacity-0"
+                />
+
+                <div
+                  className={`mx-auto mb-8 grid h-20 w-20 place-items-center rounded-2xl border transition-colors ${
+                    submit === 'error'
+                      ? 'border-amber-400/40 bg-amber-400/10 text-amber-300'
+                      : 'border-accent/40 bg-accent/10 text-accent'
+                  }`}
+                >
+                  {submit === 'sending' ? (
+                    <Loader2 size={40} className="animate-spin" />
+                  ) : submit === 'error' ? (
+                    <AlertCircle size={40} />
+                  ) : (
+                    <Check size={40} />
+                  )}
                 </div>
                 <h2 className="text-3xl font-extrabold sm:text-4xl">
-                  <TypingText text="Заявка собрана!" speed={55} caret={false} immediate />
+                  <TypingText
+                    text={
+                      submit === 'sending'
+                        ? 'Отправляем…'
+                        : submit === 'sent'
+                          ? 'Заявка отправлена!'
+                          : submit === 'error'
+                            ? 'Не удалось отправить'
+                            : 'Заявка собрана!'
+                    }
+                    speed={45}
+                    caret={false}
+                    immediate
+                  />
                 </h2>
                 <p className="mx-auto mt-4 max-w-content text-[15px] text-white/65">
-                  {answers.name ? `${answers.name}, ` : ''}осталось отправить её мне.
-                  Нажмите кнопку ниже — откроется письмо с вашими ответами. Отвечу
-                  в течение дня.
+                  {submit === 'sent' ? (
+                    <>
+                      {answers.name ? `${answers.name}, ` : ''}
+                      всё получил в Telegram. Свяжусь в ближайшее время — обычно
+                      в течение дня.
+                    </>
+                  ) : submit === 'error' ? (
+                    <>
+                      Автоматическая отправка не сработала. Пришлите ответы одним
+                      из способов ниже — они уже собраны.
+                    </>
+                  ) : submit === 'sending' ? (
+                    <>Пара секунд — передаю ваши ответы.</>
+                  ) : (
+                    <>
+                      {answers.name ? `${answers.name}, ` : ''}осталось отправить.
+                      Выберите удобный способ ниже.
+                    </>
+                  )}
                 </p>
 
                 <div className="mt-9 flex flex-wrap justify-center gap-4">
+                  {submit === 'error' && (
+                    <button
+                      onClick={sendToBot}
+                      className="group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-[14px] font-bold uppercase text-ink transition hover:brightness-110"
+                    >
+                      Попробовать снова
+                      <ArrowRight
+                        size={18}
+                        className="transition-transform group-hover:translate-x-1"
+                      />
+                    </button>
+                  )}
                   <a
                     href={mailtoHref}
-                    className="group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-[14px] font-bold uppercase text-ink transition hover:brightness-110"
+                    className={`group inline-flex items-center gap-2 rounded-full px-8 py-4 text-[14px] font-bold uppercase transition ${
+                      submit === 'sent' || submit === 'error'
+                        ? 'border border-white/15 text-white/80 hover:border-accent/50 hover:text-white'
+                        : 'bg-accent text-ink hover:brightness-110'
+                    }`}
                   >
                     Отправить на почту
                     <ArrowRight

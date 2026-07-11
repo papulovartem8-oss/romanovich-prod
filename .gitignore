@@ -7,6 +7,9 @@ dist-ssr/
 
 # Local env / editor
 *.local
+.env
+.env.local
+.env.*.local
 .DS_Store
 .vite/
 *.log
