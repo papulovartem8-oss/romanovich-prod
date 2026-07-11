@@ -455,6 +455,10 @@ export default function Home() {
         <HoloDecor variant="b" grid aura />
         <div className="pointer-events-none absolute left-1/2 top-0 h-72 w-[700px] -translate-x-1/2 rounded-full bg-accent/20 blur-[120px]" />
         <div className="relative z-10 mx-auto max-w-3xl px-6 text-center">
+          <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/10 px-4 py-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.25em] text-accent">
+            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-accent" />
+            Бесплатно
+          </span>
           <h2 className="text-4xl font-extrabold uppercase leading-tight tracking-tight sm:text-5xl">
             Готовы запустить{' '}
             <span className="holo-text font-serif italic normal-case">
@@ -463,8 +467,9 @@ export default function Home() {
             ?
           </h2>
           <p className="mx-auto mt-6 max-w-content text-[15px] text-white/65">
-            Оставьте заявку — задам несколько вопросов о проекте и вернусь с
-            предложением. Это займёт пару минут.
+            Оставьте заявку на бесплатную консультацию — задам несколько
+            вопросов, разберу задачу и предложу решение. Занимает пару минут,
+            ни к чему не обязывает.
           </p>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
             <Magnetic>
@@ -472,7 +477,7 @@ export default function Home() {
                 to="/brief"
                 className="group inline-flex items-center gap-2 rounded-full bg-accent px-8 py-4 text-[14px] font-bold uppercase tracking-wide text-ink transition hover:brightness-110"
               >
-                Оставить заявку
+                Бесплатная консультация
                 <ArrowRight
                   size={18}
                   className="transition-transform group-hover:translate-x-1"

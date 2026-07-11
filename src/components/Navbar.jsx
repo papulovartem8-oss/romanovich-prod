@@ -102,7 +102,7 @@ export default function Navbar() {
             onClick={() => setOpen(false)}
             className="mt-6 inline-flex w-fit rounded-full bg-accent px-7 py-3 font-bold uppercase text-ink"
           >
-            Оставить заявку
+            Бесплатная консультация
           </Link>
         </div>
       </div>
