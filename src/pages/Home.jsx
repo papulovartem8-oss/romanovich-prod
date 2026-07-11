@@ -24,6 +24,7 @@ import BlurText from '../components/BlurText.jsx'
 import Magnetic from '../components/Magnetic.jsx'
 import TiltCard from '../components/TiltCard.jsx'
 import CountUp from '../components/CountUp.jsx'
+import { cases } from '../data/cases.js'
 
 const services = [
   {
@@ -59,37 +60,6 @@ const stats = [
   { value: '5+', label: 'лет в разработке' },
   { value: '40+', label: 'запущенных проектов' },
   { value: '100%', label: 'проектов до результата' },
-]
-
-// Работы. Просто добавьте новые объекты в массив, чтобы расширить.
-const cases = [
-  {
-    n: '01',
-    tag: 'Лендинг · салон красоты',
-    year: '2025',
-    title: '«Пили ногти, а не мужа»',
-    desc: 'Лендинг салона красоты в Москве: услуги, прайс, галерея работ, мастера и отзывы. Онлайн-запись за минуту, адаптив и быстрая загрузка.',
-    stack: ['HTML5', 'CSS3', 'JavaScript'],
-    metric: '1 мин',
-    metricLabel: 'до онлайн-записи',
-    href: 'https://papulovartem8-oss.github.io/pili-nogti-landing/',
-    preview: 'https://papulovartem8-oss.github.io/pili-nogti-landing/',
-    domain: 'pili-nogti-landing',
-  },
-  {
-    n: '02',
-    badge: 'Личный проект',
-    tag: 'Авторский концепт',
-    year: '2025',
-    title: 'prmpt — archive collection',
-    desc: 'Собственная концепция — без брифа и заказчика. Экспериментальный лендинг-архив: акцент на типографику, ритм и подачу. Сделал сам, чтобы проверить идею и стиль.',
-    stack: ['React', 'Vite'],
-    metric: 'Концепт',
-    metricLabel: 'личная работа, без заказчика',
-    href: 'https://papulovartem8-oss.github.io/prmpt-landing/',
-    preview: 'https://papulovartem8-oss.github.io/prmpt-landing/',
-    domain: 'prmpt-landing',
-  },
 ]
 
 export default function Home() {
@@ -343,7 +313,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <div className="flex items-end justify-between gap-6">
+                  <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
                     <div>
                       <div className="holo-text text-4xl font-extrabold">
                         {c.metric}
@@ -352,14 +322,26 @@ export default function Home() {
                         {c.metricLabel}
                       </div>
                     </div>
-                    <a
-                      href={c.href}
-                      target="_blank"
-                      rel="noopener"
-                      className="inline-flex items-center gap-2 rounded-full border border-accent/40 px-5 py-2.5 text-[13px] font-semibold text-accent transition hover:bg-accent hover:text-ink"
-                    >
-                      Открыть сайт <ArrowUpRight size={15} />
-                    </a>
+                    <div className="flex flex-wrap items-center gap-3">
+                      <Link
+                        to={`/case/${c.slug}`}
+                        className="group inline-flex items-center gap-2 rounded-full bg-accent px-5 py-2.5 text-[13px] font-bold uppercase tracking-wide text-ink transition hover:brightness-110"
+                      >
+                        Показать процесс
+                        <ArrowRight
+                          size={15}
+                          className="transition-transform group-hover:translate-x-1"
+                        />
+                      </Link>
+                      <a
+                        href={c.href}
+                        target="_blank"
+                        rel="noopener"
+                        className="inline-flex items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-[13px] font-semibold text-white/80 transition hover:border-accent/50 hover:text-white"
+                      >
+                        Открыть сайт <ArrowUpRight size={15} />
+                      </a>
+                    </div>
                   </div>
                 </div>
 

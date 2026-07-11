@@ -5,8 +5,9 @@ import CursorGlow from './components/CursorGlow.jsx'
 import EnergyLine from './components/EnergyLine.jsx'
 import Home from './pages/Home.jsx'
 
-// /brief is code-split so its Framer Motion flow isn't in the initial bundle
+// /brief and /case/:slug are code-split so their weight isn't in the initial bundle
 const Brief = lazy(() => import('./pages/Brief.jsx'))
+const Case = lazy(() => import('./pages/Case.jsx'))
 
 // Scroll to top on route change, or to a #hash target if present.
 function ScrollManager() {
@@ -41,6 +42,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/brief" element={<Brief />} />
+          <Route path="/case/:slug" element={<Case />} />
         </Routes>
       </Suspense>
     </>
