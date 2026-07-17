@@ -264,6 +264,20 @@ export default function Brief() {
                     </span>
                   )}
                 </div>
+
+                {/* На последнем шаге — юр-уведомление о согласии на обработку */}
+                {step === total - 1 && (
+                  <p className="mt-5 max-w-md text-[11px] leading-relaxed text-white/40">
+                    Нажимая «Завершить», вы соглашаетесь с{' '}
+                    <Link
+                      to="/privacy"
+                      className="text-white/60 underline underline-offset-2 transition hover:text-accent"
+                    >
+                      Политикой конфиденциальности
+                    </Link>{' '}
+                    и даёте согласие на обработку персональных данных.
+                  </p>
+                )}
               </motion.div>
             ) : (
               <motion.div

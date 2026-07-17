@@ -483,12 +483,22 @@ export default function Home() {
 
       {/* ---------------- FOOTER ---------------- */}
       <footer className="border-t border-white/10 bg-ink py-10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 text-[13px] text-white/40 md:flex-row">
-          <span className="font-bold tracking-tight text-white/70">
-            ROMANOVICH<span className="text-accent"> PROD</span>
-          </span>
-          <span>© {new Date().getFullYear()} Артём Романович. Все права защищены.</span>
-          <div className="flex items-center gap-5">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 text-[13px] text-white/40 md:flex-row">
+          <div className="flex flex-col items-center gap-1 md:items-start">
+            <span className="font-bold tracking-tight text-white/70">
+              ROMANOVICH<span className="text-accent"> PROD</span>
+            </span>
+            <span className="text-[12px] text-white/40">
+              © {new Date().getFullYear()} Артём Романович
+            </span>
+          </div>
+          <div className="flex flex-wrap items-center justify-center gap-5">
+            <Link
+              to="/privacy"
+              className="transition hover:text-accent"
+            >
+              Политика конфиденциальности
+            </Link>
             <a
               href={TELEGRAM}
               target="_blank"

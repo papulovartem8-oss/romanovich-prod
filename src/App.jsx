@@ -3,11 +3,13 @@ import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import CursorGlow from './components/CursorGlow.jsx'
 import EnergyLine from './components/EnergyLine.jsx'
+import CookieBanner from './components/CookieBanner.jsx'
 import Home from './pages/Home.jsx'
 
-// /brief and /case/:slug are code-split so their weight isn't in the initial bundle
+// Secondary routes are code-split so their weight isn't in the initial bundle
 const Brief = lazy(() => import('./pages/Brief.jsx'))
 const Case = lazy(() => import('./pages/Case.jsx'))
+const Privacy = lazy(() => import('./pages/Privacy.jsx'))
 
 // Scroll to top on route change, or to a #hash target if present.
 function ScrollManager() {
@@ -31,6 +33,7 @@ export default function App() {
       <ScrollManager />
       <CursorGlow />
       <EnergyLine />
+      <CookieBanner />
       <Navbar />
       <Suspense
         fallback={
@@ -43,6 +46,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/brief" element={<Brief />} />
           <Route path="/case/:slug" element={<Case />} />
+          <Route path="/privacy" element={<Privacy />} />
         </Routes>
       </Suspense>
     </>
