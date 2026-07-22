@@ -1,9 +1,10 @@
-import { useEffect, lazy, Suspense } from 'react'
+import { useCallback, useEffect, lazy, Suspense, useState } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import Navbar from './components/Navbar.jsx'
 import CursorGlow from './components/CursorGlow.jsx'
 import EnergyLine from './components/EnergyLine.jsx'
 import CookieBanner from './components/CookieBanner.jsx'
+import IntroLoader from './components/IntroLoader.jsx'
 import Home from './pages/Home.jsx'
 
 // Secondary routes are code-split so their weight isn't in the initial bundle
@@ -28,8 +29,12 @@ function ScrollManager() {
 }
 
 export default function App() {
+  const [introDone, setIntroDone] = useState(false)
+  const completeIntro = useCallback(() => setIntroDone(true), [])
+
   return (
     <>
+      {!introDone && <IntroLoader onComplete={completeIntro} />}
       <ScrollManager />
       <CursorGlow />
       <EnergyLine />
