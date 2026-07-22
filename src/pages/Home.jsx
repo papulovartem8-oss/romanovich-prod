@@ -24,6 +24,7 @@ import BlurText from '../components/BlurText.jsx'
 import Magnetic from '../components/Magnetic.jsx'
 import TiltCard from '../components/TiltCard.jsx'
 import CountUp from '../components/CountUp.jsx'
+import HeroTelemetry, { HeroSignalRail } from '../components/HeroTelemetry.jsx'
 import { cases } from '../data/cases.js'
 
 const services = [
@@ -70,11 +71,14 @@ export default function Home() {
       {/* ---------------- HERO ---------------- */}
       <section className="relative flex min-h-screen items-center">
         <HoloDecor variant="c" grid aura scanlines={false} particles={5} />
+        <HeroTelemetry />
         <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-col px-6 pt-52 sm:pt-28">
           {/* Floating liquid glass card, lifted above the headline */}
           <div className="mb-2 flex">
             <LiquidGlassCard />
           </div>
+
+          <HeroSignalRail />
 
           <motion.p
             initial={{ opacity: 0, y: 12 }}
