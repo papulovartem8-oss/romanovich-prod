@@ -483,6 +483,53 @@ html.intro-lock body {
   display: none;
 }
 
+/* Fragmented pixels floating over the hero glow */
+.digital-block-field {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.72;
+  mix-blend-mode: screen;
+  mask-image: radial-gradient(ellipse 60% 58% at 62% 38%, #000 0%, rgba(0, 0, 0, 0.92) 54%, transparent 88%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 58% at 62% 38%, #000 0%, rgba(0, 0, 0, 0.92) 54%, transparent 88%);
+}
+
+.digital-pixel-block {
+  position: absolute;
+  left: var(--block-x);
+  top: var(--block-y);
+  width: var(--block-w);
+  height: var(--block-h);
+  border-radius: 1px;
+  background: linear-gradient(90deg, rgba(94, 210, 156, 0.08), rgba(94, 210, 156, 0.82), rgba(167, 243, 208, 0.25));
+  box-shadow:
+    7px 0 0 rgba(94, 210, 156, 0.18),
+    14px 0 0 rgba(94, 210, 156, 0.06),
+    0 0 12px rgba(94, 210, 156, 0.34);
+  transform-origin: left center;
+  animation: digital-block-signal var(--block-duration) steps(1, end) var(--block-delay) infinite;
+}
+
+.digital-pixel-block::after {
+  content: '';
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 12%;
+  width: 42%;
+  height: 1px;
+  background: rgba(94, 210, 156, 0.34);
+  box-shadow: 0 0 7px rgba(94, 210, 156, 0.4);
+}
+
+.digital-pixel-block.is-outline {
+  border: 1px solid rgba(94, 210, 156, 0.42);
+  background: rgba(94, 210, 156, 0.025);
+  box-shadow:
+    6px 0 0 rgba(94, 210, 156, 0.08),
+    0 0 10px rgba(94, 210, 156, 0.14);
+}
+
 @keyframes hero-beam-pass {
   0%, 14% { left: -12%; opacity: 0; }
   20% { opacity: 0.45; }
@@ -511,6 +558,16 @@ html.intro-lock body {
   100% { transform: scaleY(var(--level-mid)); opacity: 0.56; }
 }
 
+@keyframes digital-block-signal {
+  0%, 100% { opacity: 0.12; transform: translate3d(0, 0, 0) scaleX(0.55); filter: brightness(0.8); }
+  11% { opacity: 0.76; transform: translate3d(5px, 0, 0) scaleX(1); filter: brightness(1.3); }
+  17% { opacity: 0.24; transform: translate3d(-2px, 0, 0) scaleX(0.72); }
+  39% { opacity: 0.48; transform: translate3d(0, -3px, 0) scaleX(0.88); }
+  43% { opacity: 0.08; transform: translate3d(9px, -3px, 0) scaleX(0.36); }
+  68% { opacity: 0.62; transform: translate3d(2px, 2px, 0) scaleX(1.08); filter: brightness(1.1); }
+  73% { opacity: 0.18; transform: translate3d(12px, 2px, 0) scaleX(0.48); }
+}
+
 @media (max-width: 1023px) {
   .hero-telemetry__panel,
   .hero-scan-beam {
@@ -519,6 +576,16 @@ html.intro-lock body {
 }
 
 @media (max-width: 639px) {
+  .digital-block-field {
+    opacity: 0.58;
+    mask-image: radial-gradient(ellipse 100% 56% at 68% 37%, #000 0%, rgba(0, 0, 0, 0.9) 58%, transparent 94%);
+    -webkit-mask-image: radial-gradient(ellipse 100% 56% at 68% 37%, #000 0%, rgba(0, 0, 0, 0.9) 58%, transparent 94%);
+  }
+
+  .digital-pixel-block:nth-child(n + 12) {
+    display: none;
+  }
+
   .hero-signal-rail {
     display: flex;
     width: min(100%, 310px);
